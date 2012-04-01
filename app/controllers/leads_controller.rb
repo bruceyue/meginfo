@@ -42,9 +42,10 @@ class LeadsController < ApplicationController
   # POST /leads.json
   def create
     @lead = Lead.new(params[:lead])
+    # require field can not be null
     @lead['OwnerId'] = '00590000000pQOL'    #ownerId here is the Id of the User you want the Lead associated with
     @lead['IsConverted'] = false
-
+    @lead['IsUnreadByOwner'] = false
     respond_to do |format|
       if @lead.save
         format.html { redirect_to @lead, notice: 'Lead was successfully created.' }
@@ -76,7 +77,7 @@ class LeadsController < ApplicationController
   # DELETE /leads/1.json
   def destroy
     @lead = Lead.find(params[:id])
-    @lead.destroy
+    @lead.delete
 
     respond_to do |format|
       format.html { redirect_to leads_url }
@@ -84,10 +85,26 @@ class LeadsController < ApplicationController
     end
   end
   
+  def dbdc_client
+    unless @dbdc_client
+      config = YAML.load_file(File.join(::Rails.root, 'config', 'databasedotcom.yml'))
+      config = config.has_key?(::Rails.env) ? config[::Rails.env] : config
+      username = config["username"]
+      password = config["password"]
+      @dbdc_client = Databasedotcom::Client.new(config)
+      @dbdc_client.authenticate(:username => username, :password => password)
+      @client.list_sobjects
+    end
+
+    @dbdc_client
+  end
+=begin
   def search
     config = YAML.load_file(File.join(::Rails.root, 'config', 'databasedotcom.yml'))
     client = Databasedotcom::Client.new(config)          
     client.authenticate :username => config[:username], :password => config[:password]
-    @leads = client.query("select id, name from Lead")
+    @leads = client.query("select id, name from Lead limit 1000")
   end
+=end
+
 end
