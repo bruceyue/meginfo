@@ -42,6 +42,8 @@ class LeadsController < ApplicationController
   # POST /leads.json
   def create
     @lead = Lead.new(params[:lead])
+    @lead['OwnerId'] = '00590000000pQOL'    #ownerId here is the Id of the User you want the Lead associated with
+    @lead['IsConverted'] = false
 
     respond_to do |format|
       if @lead.save
@@ -80,5 +82,12 @@ class LeadsController < ApplicationController
       format.html { redirect_to leads_url }
       format.json { head :no_content }
     end
+  end
+  
+  def search
+    config = YAML.load_file(File.join(::Rails.root, 'config', 'databasedotcom.yml'))
+    client = Databasedotcom::Client.new(config)          
+    client.authenticate :username => config[:username], :password => config[:password]
+    @leads = client.query("select id, name from Lead")
   end
 end

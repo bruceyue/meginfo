@@ -11,3 +11,61 @@
  *= require_self
  *= require_tree .
 */
+#div#nourls 
+{
+   margin: 10px auto;
+   border: 3px dashed gray;
+   color: gray;
+   padding: 20px;
+   font-size: 20px;
+   width: 800px;
+   text-align: center;
+   -moz-border-radius: 5px;
+   -webkit-border-radius: 5px;
+}
+
+#lead_list table {
+        border-collapse: collapse;
+}
+
+#lead_list table tr td {
+        padding: 5px;
+        vertical-align: top;
+}
+
+#lead_list .list_image {
+  width:        60px;
+  height:       70px;
+}
+
+#lead_list .list_description {
+  width:        60%;
+}
+
+#lead_list .list_description dl {
+        margin: 0;
+}
+
+#lead_list .list_description dt {
+	color:        #244;
+	font-weight:  bold;
+	font-size:    larger;
+}
+
+#lead_list .list_description dd {
+        margin: 0;
+}
+
+#lead_list .list_actions {
+  font-size:    x-small;
+  text-align:   right;
+  padding-left: 1em;
+}
+
+#lead_list .list_line_even {
+  background:   #e0f8f8;
+}
+
+#lead_list .list_line_odd {
+  background:   #f8b0f8;
+}

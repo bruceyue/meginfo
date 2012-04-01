@@ -1,4 +1,6 @@
 SfdcRailsDemo::Application.routes.draw do
+  resources :leads
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

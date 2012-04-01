@@ -1,13 +1,16 @@
 <h1>Listing leads</h1>
-
+<div id="nourls">
 <table>
   <tr>
     <th>Firstname</th>
     <th>Lastname</th>
     <th>Company</th>
+    <th>Status</th>
+    <th>Phone</th>
+    <th>Primary</th>
+		<th></th>
     <th></th>
-    <th></th>
-    <th></th>
+		<th></th>
   </tr>
 
 <% @leads.each do |lead| %>
@@ -15,13 +18,15 @@
     <td><%= lead.FirstName %></td>
     <td><%= lead.LastName %></td>
     <td><%= lead.Company %></td>
+		<td><%= lead.Status %></td>
+		<td><%= lead.Phone %></td>
+		<td><%= lead.Primary__c %></td>
     <td><%= link_to 'Show', lead %></td>
     <td><%= link_to 'Edit', edit_lead_path(lead) %></td>
     <td><%= link_to 'Destroy', lead, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
-
+</div>
 <br />
-
 <%= link_to 'New Lead', new_lead_path %>
